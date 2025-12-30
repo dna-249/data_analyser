@@ -1,0 +1,14 @@
+# Virtual Environment
+django/
+Include/
+Lib/
+Scripts/
+share/
+pyvenv.cfg
+
+# Python cachetyguyguyguygu
+__pycache__/
+*.pyc
+
+# Local Database
+db.sqlite3

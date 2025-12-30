@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<body>
+     <form method="POST" action="/nur/">
+    {% csrf_token %}
+    <input type="number" name="col" placeholder="row">
+    <input type="number" name="head" placeholder="head">
+    <input type="number" name="tail" placeholder="tail">
+    <input type="number" name="iloc" placeholder="iloc">
+    <input type="text" name="loc" placeholder="col">
+    <label for="describe">Describe
+    <input type="checkbox" value="0" name="discribe" placeholder="iloc">
+    </label>
+    <button type="submit">Send to Python</button>
+</form>
+ 
+    <div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-dark text-green mt-5">
+            <h5 class="mb-0"> {{col.to_list}}</h5>
+        </div>
+        <div class="card-body">
+            <div class="vstack gap-3"> 
+                {% for key, value in user.items %}
+                    <div class="p-2 border-bottom d-flex justify-content-between">
+                        <span class="text-muted fw-bold text-uppercaseSmall">{{ key }}:</span>
+                        <span>{{ value|default:"—" }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-uppercaseSmall {
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+</style>
+   
+   
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>hello world</div>
+    <h6>{{user.name}}</h6>
+</body>
+</html>

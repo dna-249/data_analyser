@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Document</title>
+</head>
+<body>
+
+
+<div class="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
+    <div class="text-center mb-12">
+        <h1 class="text-5xl font-extrabold text-gray-900 mb-4">📊 Data Analysis</h1>
+        <p class="text-xl text-gray-600">The simplest way to analyze CSV, JSON, Excel, and PDF data.</p>
+    </div>
+
+    <div class="w-full max-w-2xl bg-white rounded-xl shadow-md p-8 border-2 border-dashed border-blue-400">
+        <form method="POST" action="/upload/"  enctype="multipart/form-data" class="flex flex-col items-center">
+            {% csrf_token %}
+            <div class="mb-4">
+                <svg class="mx-auto h-12 w-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+            </div>
+            <label class="block mb-4">
+                <span class="sr-only">Choose file</span>
+                <input type="text" name="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+            </label>
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">Analyze Data</button>
+        </form>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-5xl">
+        <div class="text-center p-4">
+            <h3 class="font-bold text-lg mb-2">🔍 Smart Parsing</h3>
+            <p class="text-sm text-gray-500">Auto-detects delimiters and flattens nested JSON.</p>
+        </div>
+        <div class="text-center p-4">
+            <h3 class="font-bold text-lg mb-2">📈 Visual Discovery</h3>
+            <p class="text-sm text-gray-500">{% for users in user%}
+                   {{users.user_id}}
+                   {% endfor %}
+            </p>
+        </div>
+        <div class="text-center p-4">
+            <h3 class="font-bold text-lg mb-2">📄 PDF Extraction</h3>
+            <p class="text-sm text-gray-500">Identify and extract tables from PDF documents.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
