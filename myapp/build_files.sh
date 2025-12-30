@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "BUILD START"
-# Use --no-cache to keep the environment slim
-python3.12 -m pip install --no-cache-dir -r requirements.txt
+python3.12 -m pip install -r requirements.txt
+
+# Run migrations to create the tables in the database
+python3.12 manage.py migrate --noinput
 python3.12 manage.py collectstatic --noinput --clear
 echo "BUILD END"
