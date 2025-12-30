@@ -26,7 +26,7 @@ def Home(request):
     
        
         item = User.objects.all()
-        df = pd.DataFrame(item[2].dynamic_data)
+        df = pd.DataFrame(item[0].dynamic_data)
         cols = df.columns
         if head:  
             head = int(head)
