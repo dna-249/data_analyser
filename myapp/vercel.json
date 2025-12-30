@@ -19,10 +19,5 @@
       "src": "/(.*)",
       "dest": "myapp/wsgi.py"
     }
-  ],
-  "functions": {
-    "myapp/wsgi.py": {
-      "excludeFiles": "staticfiles/**"
-    }
-  }
+  ]
 }

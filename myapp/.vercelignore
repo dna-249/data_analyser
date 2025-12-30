@@ -1,0 +1,10 @@
+# Exclude local environment and cache
+venv/
+.venv/
+__pycache__/
+*.pyc
+db.sqlite3
+
+# Exclude static files from the FUNCTION (Vercel will still serve them via CDN)
+staticfiles/
+static/
