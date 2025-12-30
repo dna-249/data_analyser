@@ -1,16 +1,17 @@
 from django.shortcuts import render
 from django.core.management import call_command
-from .models import User 
+from django.db import connection
+from .models import User
 
 def index(request):
-    try:
-        # 1. Try to fetch users
-        ids = User.objects.all()
-        # Trigger a query to see if the table exists
-        list(ids[:1]) 
-    except Exception:
-        # 2. If the table is missing, run migrate automatically
+    # Check if our table exists in the current session
+    all_tables = connection.introspection.table_names()
+    
+    # If the table isn't there, run migrate programmatically
+    if "app_user" not in all_tables:
         call_command('migrate', interactive=False)
-        ids = User.objects.all()
-        
+    
+    # Now it's safe to query
+    ids = User.objects.all()
+    
     return render(request, 'welcome.html', {"user": ids})
