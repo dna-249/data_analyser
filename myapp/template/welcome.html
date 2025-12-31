@@ -4,94 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>DataLab | Professional Analysis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>DataLab | Analytics</title>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .feature-card { @apply bg-white p-8 rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-md hover:-translate-y-1; }
-        .glass-input { @apply block w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm transition-all focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none placeholder:text-slate-400; }
-        .btn-primary { @apply w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-200 transition-all active:scale-[0.98] flex justify-center items-center space-x-2; }
-        .btn-secondary { @apply flex items-center justify-center space-x-2 px-6 py-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.01em; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .btn-gradient { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.4); }
+        .input-focus { transition: all 0.2s ease; }
+        .input-focus:focus { @apply border-blue-500 ring-4 ring-blue-500/10; }
     </style>
 </head>
-<body class="bg-[#fcfcfd] text-slate-900 min-h-screen">
+<body class="bg-[#f8fafc] text-slate-900 min-h-screen flex flex-col">
 
-    <main class="container mx-auto px-6 py-12 flex flex-col items-center">
-        <div class="text-center mb-16 max-w-2xl">
-            <div class="inline-flex items-center justify-center p-3 bg-blue-50 rounded-2xl text-blue-600 mb-6">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 2v-6m10 10V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2z"></path></svg>
+    <main class="container mx-auto px-6 pt-20 pb-12 flex-grow">
+        <div class="text-center mb-16">
+            <div class="inline-flex p-3 bg-white rounded-2xl shadow-sm border border-slate-100 mb-6">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
             </div>
-            <h1 class="text-5xl font-extrabold tracking-tight text-slate-900 mb-4">Data Lab</h1>
-            <p class="text-lg text-slate-500 font-medium">Professional-grade analysis for CSV, JSON, Excel, and PDF structures.</p>
+            <h1 class="text-5xl font-extrabold text-slate-900 tracking-tight mb-3">Data<span class="text-blue-600">Lab</span></h1>
+            <p class="text-slate-500 font-medium">Next-generation structural data analysis</p>
         </div>
 
-        <div class="w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 p-3 border border-slate-100">
-            <div class="border-2 border-dashed border-slate-100 rounded-[2rem] p-10 flex flex-col items-center bg-slate-50/30">
-                <form method="POST" action="/upload/" enctype="multipart/form-data" class="w-full">
+        <div class="max-w-xl mx-auto mb-20">
+            <div class="glass-card p-10 rounded-[2.5rem] shadow-xl shadow-blue-900/5">
+                <form method="POST" action="/upload/" enctype="multipart/form-data" class="space-y-6">
                     {% csrf_token %}
+                    <div class="space-y-2 mb-8">
+                        <label class="text-sm font-bold text-slate-700 ml-1 uppercase tracking-wider">Source Identifier</label>
+                        <input type="text" name="file" placeholder="Enter path or reference ID..." 
+                               class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl outline-none input-focus text-slate-600">
+                    </div>
                     
-                    <div class="text-center mb-10">
-                        <h2 class="text-xl font-bold text-slate-800">Identify Source</h2>
-                        <p class="text-sm text-slate-400 mt-1">Provide the file reference or path below</p>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div class="relative">
-                            <input type="text" name="file" placeholder="Enter file reference or identifier..." class="glass-input">
-                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-primary">
-                            <span>Initialize Analysis Engine</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                        </button>
-                    </div>
+                    <button type="submit" class="btn-gradient w-full py-4 rounded-2xl text-white font-bold flex items-center justify-center space-x-2">
+                        <span>Initialize Engine</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
                 </form>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20 max-w-6xl w-full">
-            
-            <div class="feature-card">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Active Sessions</h3>
-                <div class="space-y-2">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Live Sessions</h3>
+                <div class="space-y-3">
                     {% for users in user %}
-                        <div class="flex items-center space-x-2 text-sm font-semibold text-slate-700">
-                            <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-                            <span>ID: {{users.user_id}}</span>
-                        </div>
+                    <div class="flex items-center space-x-3 text-sm font-semibold text-slate-600 bg-slate-50 p-2 rounded-xl">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span>ID: {{users.user_id}}</span>
+                    </div>
                     {% empty %}
-                        <p class="text-sm text-slate-400 italic">No active users</p>
+                    <p class="text-sm text-slate-400 italic">No active sessions</p>
                     {% endfor %}
                 </div>
             </div>
 
-            <div class="feature-card flex flex-col justify-between">
+            <div class="bg-blue-600 p-8 rounded-3xl shadow-lg shadow-blue-200 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Workspace</h3>
-                    <p class="text-sm text-slate-500 mb-6">Access your saved queries and filtered datasets.</p>
+                    <h3 class="text-[10px] font-black text-blue-100 uppercase tracking-[0.2em] mb-4">Workspace</h3>
+                    <p class="text-white font-medium mb-6">Quick access to stored queries and recent datasets.</p>
                 </div>
-                <a href="/lab/" class="btn-secondary group">
-                    <span>Enter Research Lab</span>
-                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                <a href="/lab/" class="bg-white/10 hover:bg-white/20 text-white text-center py-3 rounded-xl text-sm font-bold transition-colors">
+                    Enter Research Lab
                 </a>
             </div>
 
-            <div class="feature-card">
-                <div class="flex items-center space-x-2 mb-3">
+            <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                <div class="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center mb-4">
                     <span class="text-xl">📄</span>
-                    <h3 class="font-bold text-slate-800">PDF Extraction</h3>
                 </div>
-                <p class="text-sm text-slate-500 leading-relaxed">Advanced algorithms to isolate and export tabular data from PDF documents.</p>
+                <h3 class="font-bold text-slate-800 mb-2">PDF Parser</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">Extract tabular structures from unstructured documents using Neural Extraction.</p>
             </div>
-
         </div>
     </main>
 
-    <footer class="py-12 mt-auto border-t border-slate-100">
-        <p class="text-center text-[10px] font-bold text-slate-300 uppercase tracking-[0.3em]">&copy; 2025 DATALAB INTERNAL SYSTEMS</p>
+    <footer class="py-10 border-t border-slate-200/60">
+        <p class="text-center text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">Internal System &bull; &copy; 2025 DataLab</p>
     </footer>
 
 </body>
