@@ -11,7 +11,7 @@ def index(request):
     if "app_user" not in all_tables:
         call_command('migrate', interactive=False)
     
-    # Now it's safe to query
+    # Now it's safe to querygiu
     ids = User.objects.all()
     
     return render(request, 'welcome.html', {"user": ids})
