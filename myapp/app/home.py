@@ -70,7 +70,7 @@ def Home(request):
             else:
                 df = df[[loc]] 
                 
-        if fil & fil2:
+        if fil:
             if discribe == True:
                 df = filter_data(df,fil,fil2)
                 df = df.describe()
