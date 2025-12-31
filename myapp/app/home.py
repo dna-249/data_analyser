@@ -70,12 +70,12 @@ def Home(request):
             else:
                 df = df[[loc]] 
                 
-        # if fil & fil2:
-        #     if discribe == True:
-        #         df = filter_data(df,fil,fil2)
-        #         df = df.describe()
-        #     else:
-        #         df = filter_data(df,fil,fil2)
+        if fil & fil2:
+            if discribe == True:
+                df = filter_data(df,fil,fil2)
+                df = df.describe()
+            else:
+                df = filter_data(df,fil,fil2)
                 
                
             
@@ -90,24 +90,23 @@ def Home(request):
 
 
 
-# def filter_data(df,cols, values):
-#     # Start with a mask of all 'True' (keep everything)
-#     mask = True 
-#     cols = cols.split(",")
-#     values = values.split(",")
-#     # Loop through your lists and apply each filter one by one
-#     for i in range(len(cols)):
-#         column_name = cols[i]
-#         search_value = values[i]
-        
-#         # Combine the current filter with the previous ones using AND (&)
-#         # .str.strip() handles invisible spaces in your CSV
-#         # Convert to string first, then strip
-#         mask &= (df[column_name].astype(str).str.strip() == str(search_value))
+def filter_data(df,cols_str, values_str):
+    # .split() without arguments handles multiple spaces automatically
+    cols = cols_str.split()
+    values = values_str.split()
     
-#     return df[mask]
+    # Check if lists match to avoid errors
+    if len(cols) != len(values):
+        raise ValueError("The number of columns must match the number of values.")
 
-
+    # Initialize mask with all True
+    mask = pd.Series([True] * len(df))
     
-
-    
+    # zip() is cleaner for looping through two lists simultaneously
+    for col, val in zip(cols, values):
+        if col in df.columns:
+            # Update mask: cumulative AND logic
+            current_filter = df[col].astype(str).str.strip() == str(val).strip()
+            mask &= current_filter
+            
+    return df[mask]
